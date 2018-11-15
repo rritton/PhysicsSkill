@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<mvc:annotation-driven />
+    <mvc:default-servlet-handler />
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<context:annotation-config />
+	<context:component-scan	base-package="fr.esvres.enseignement" />
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="/WEB-INF/db.properties" />
+	</bean>
+	
+		<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+
+	<bean id="datasource"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${login}" />
+		<property name="password" value="${pass}" />
+	</bean>
+
+
+
+	<bean id="emf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="datasource" />
+
+		<property name="packagesToScan">
+			<list>
+				<value>fr.esvres.enseignement.entity.Evaluation</value>
+				<value>fr.esvres.enseignement.entity.Exercice</value>
+				<value>fr.esvres.enseignement.personne.Joueur</value>
+				<value>fr.esvres.enseignement.personne.Apprenant</value>
+				<value>fr.esvres.enseignement.personne.Prof</value>
+				<value>fr.esvres.enseignement.Groupe</value>
+				<value>fr.esvres.enseignement.Lvl</value>
+				<value>fr.esvres.enseignement.Skill</value>
+			</list>
+		</property>
+
+		<property name="jpaVendorAdapter">
+			<bean
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="false" />
+				<property name="database" value="${db}" />
+			</bean>
+		</property>
+
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+			</props>
+		</property>
+
+	</bean>
+
+	<jpa:repositories
+		base-package="fr.esvres.enseignement..dao"
+		entity-manager-factory-ref="emf" />
+
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+		
+		
+</beans>
+	

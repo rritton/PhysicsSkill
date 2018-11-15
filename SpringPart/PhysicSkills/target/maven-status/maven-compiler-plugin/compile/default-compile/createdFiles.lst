@@ -1,0 +1,13 @@
+fr\esvres\enseignement\controller\personne\JoueurController.class
+fr\esvres\enseignement\entity\evaluation\Exercice.class
+fr\esvres\enseignement\entity\personne\Prof.class
+fr\esvres\enseignement\util\Encrypt.class
+fr\esvres\enseignement\entity\evaluation\Evaluation.class
+fr\esvres\enseignement\service\personne\GestionJoueur.class
+fr\esvres\enseignement\dao\personne\JoueurDAO.class
+fr\esvres\enseignement\entity\personne\Apprenant.class
+fr\esvres\enseignement\entity\Groupe.class
+fr\esvres\enseignement\entity\personne\Joueur.class
+fr\esvres\enseignement\entity\Skill.class
+fr\esvres\enseignement\entity\Lvl.class
+fr\esvres\enseignement\service\personne\GestionJoueurImpl.class

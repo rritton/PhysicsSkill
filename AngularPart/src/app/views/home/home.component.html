@@ -1,0 +1,19 @@
+<div class="container">
+  <form (ngSubmit)="connexion()" [formGroup]="connexionForm">
+    <div >
+      <label for="nom">Nom :</label>
+      <input class="form-control col-8" type="text" name="nom" id="nom" formControlName="nom" required placeholder="Stark">
+      <span class="erreur-message col-4">{{messageNom}}</span>
+    </div>
+    <div>
+      <label for="prenom">Prénom :</label>
+      <input class="form-control col-8" type="text" name="prenom" id="prenom" formControlName="prenom" required placeholder="Arya">
+      <span class="erreur-message col-4">{{messagePrenom}}</span>
+    </div>
+    <br/>
+    <div>
+      <button class="btn btn-primary" type="submit">Connexion</button> 
+      <span class="erreur-message">{{messageSubmit}}</span>
+    </div>
+  </form>
+</div>

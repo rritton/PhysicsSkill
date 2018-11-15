@@ -1,0 +1,81 @@
+//ANgular import
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+//Service import
+import { ConnexionService } from 'src/app/services/connexion.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+
+//Model import
+import { Eleve } from 'src/app/model/eleve';
+import { Prof } from 'src/app/model/prof';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+
+  public ldapNomCtrl: FormControl;
+  public ldapPrenomCtrl: FormControl;
+  public connexionForm: FormGroup;
+  public messageSubmit: string;
+  public messageNom: string;
+  public messagePrenom: string;
+
+  constructor(
+    private fb: FormBuilder,
+    private connexionService: ConnexionService,
+    private storageService: LocalStorageService,
+    private router: Router
+  ) { }
+
+  ngOnInit() {
+    this.ldapNomCtrl = this.fb.control('', Validators.required);
+    this.ldapPrenomCtrl = this.fb.control('', Validators.required);
+
+    this.connexionForm = this.fb.group({
+      nom: this.ldapNomCtrl,
+      prenom: this.ldapPrenomCtrl
+    });
+
+    //Initialisation des messages d'érreurs
+    this.messageSubmit = ''
+    this.messageNom = ''
+    this.messagePrenom = ''
+  }
+
+  connexion() {
+    //Les champs ont bien été remplis ?
+    let champsRemplis = true;
+    //Vérification du champ "Nom"
+    if(this.connexionForm.value.nom.trim() == '') {
+      champsRemplis = false;
+      this.messageNom = 'Veuillez renseigner votre nom.'
+    }
+    //Vérification du champ "Prénom"
+    if(this.connexionForm.value.prenom.trim() == '') {
+      champsRemplis = false;
+      this.messagePrenom = 'Veuillez renseigner votre prénom.'
+    }
+    //OUI ?
+    console.log('champsRemplis : '+champsRemplis+' typeof :'+ typeof champsRemplis);
+    if(champsRemplis){
+      const ldapInformation = {
+        nom: this.connexionForm.value.nom,
+        prenom: this.connexionForm.value.prenom
+      };
+      if(this.connexionService.connexion(ldapInformation) instanceof Eleve){
+        this.router.navigate(['elevehome']);
+      }
+      else if(this.connexionService.connexion(ldapInformation) instanceof Prof){
+        this.router.navigate(['profhome']);
+      }
+      else {
+        this.messageSubmit = 'Ensemble Nom et Prénom inconnu.'
+      }
+    }
+  }
+}
