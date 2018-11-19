@@ -18,8 +18,8 @@ import { Prof } from 'src/app/model/prof';
 })
 export class HomeComponent implements OnInit {
 
-  public ldapNomCtrl: FormControl;
-  public ldapPrenomCtrl: FormControl;
+  public NomCtrl: FormControl;
+  public PrenomCtrl: FormControl;
   public connexionForm: FormGroup;
   public messageSubmit: string;
   public messageNom: string;
@@ -33,12 +33,12 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.ldapNomCtrl = this.fb.control('', Validators.required);
-    this.ldapPrenomCtrl = this.fb.control('', Validators.required);
+    this.NomCtrl = this.fb.control('', Validators.required);
+    this.PrenomCtrl = this.fb.control('', Validators.required);
 
     this.connexionForm = this.fb.group({
-      nom: this.ldapNomCtrl,
-      prenom: this.ldapPrenomCtrl
+      nom: this.NomCtrl,
+      prenom: this.PrenomCtrl
     });
 
     //Initialisation des messages d'érreurs
@@ -61,17 +61,23 @@ export class HomeComponent implements OnInit {
       this.messagePrenom = 'Veuillez renseigner votre prénom.'
     }
     //OUI ?
-    console.log('champsRemplis : '+champsRemplis+' typeof :'+ typeof champsRemplis);
     if(champsRemplis){
-      const ldapInformation = {
+      const joueurForm = {
+        id: undefined,
         nom: this.connexionForm.value.nom,
-        prenom: this.connexionForm.value.prenom
+        prenom: this.connexionForm.value.prenom,
+        role: undefined
       };
-      if(this.connexionService.connexion(ldapInformation) instanceof Eleve){
+
+      let joueurTest = this.connexionService.connexion(joueurForm);
+      if(joueurTest instanceof Eleve || joueurTest.role == 'Eleve'){
         this.router.navigate(['elevehome']);
       }
-      else if(this.connexionService.connexion(ldapInformation) instanceof Prof){
-        this.router.navigate(['profhome']);
+      else if(joueurTest instanceof Prof || joueurTest.role == 'Prof'){
+        let joueurObtenu = joueurTest as Prof;
+        joueurObtenu.motDePasse = '';
+        this.storageService.saveSession('Prof', joueurObtenu);
+        this.router.navigate(['mdp']);
       }
       else {
         this.messageSubmit = 'Ensemble Nom et Prénom inconnu.'
