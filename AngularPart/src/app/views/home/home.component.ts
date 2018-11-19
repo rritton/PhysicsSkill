@@ -18,8 +18,8 @@ import { Prof } from 'src/app/model/prof';
 })
 export class HomeComponent implements OnInit {
 
-  public NomCtrl: FormControl;
-  public PrenomCtrl: FormControl;
+  public nomCtrl: FormControl;
+  public prenomCtrl: FormControl;
   public connexionForm: FormGroup;
   public messageSubmit: string;
   public messageNom: string;
@@ -33,12 +33,12 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.NomCtrl = this.fb.control('', Validators.required);
-    this.PrenomCtrl = this.fb.control('', Validators.required);
+    this.nomCtrl = this.fb.control('', Validators.required);
+    this.prenomCtrl = this.fb.control('', Validators.required);
 
     this.connexionForm = this.fb.group({
-      nom: this.NomCtrl,
-      prenom: this.PrenomCtrl
+      nom: this.nomCtrl,
+      prenom: this.prenomCtrl
     });
 
     //Initialisation des messages d'érreurs
