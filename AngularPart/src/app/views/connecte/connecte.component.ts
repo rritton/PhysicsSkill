@@ -22,14 +22,14 @@ export class ConnecteComponent implements OnInit {
     //Par defaut on affiche pas le component
     this.connecte = false;
     //Il y a un prof enregistré dans le localSotarge
-    if(this.storageService.readLocal('Prof') != undefined){
+    if(this.storageService.readLocal('ProfValide') != undefined){
       this.connecte = true;
-      this.prof = this.storageService.readLocal('Prof');
+      this.prof = this.storageService.readLocal('ProfValide');
     } 
     //Il y a un prof enregistré dans le sessionStorage
-    else if(this.storageService.readSession('Prof') != undefined){
+    else if(this.storageService.readSession('ProfValide') != undefined){
       this.connecte = true;
-      this.prof = this.storageService.readSession('Prof');
+      this.prof = this.storageService.readSession('ProfValide');
     }
     //Il n'y a personne
     else{

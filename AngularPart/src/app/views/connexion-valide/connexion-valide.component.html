@@ -2,7 +2,12 @@
   <form (ngSubmit)="validation()" [formGroup]="validationForm">
     <div >
       <label for="nom">Mot de passe :</label>
-      <input class="form-control col-8" type="password" name="password" id="password" formControlName="password" required placeholder="q42ghT">
+      <input class="form-control" type="password" name="password" id="password" formControlName="password" required placeholder="q42ghT">
     </div>
+    <br/>
+    <div>
+      <input class="form-control" name="sauvegarder" type="checkbox" id="sauvegarder" formControlName="sauvegarder"><label for="sauvegarder">Rester connecté.</label>
+    </div>
+    <button class="btn btn-primary" type="submit" >Valider</button>
   </form>
 </div>

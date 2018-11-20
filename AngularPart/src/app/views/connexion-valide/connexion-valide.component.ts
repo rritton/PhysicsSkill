@@ -13,6 +13,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class ConnexionValideComponent implements OnInit {
 
   public mdpCtrl: FormControl;
+  public saveCtrl: FormControl;
   public validationForm: FormGroup;
   
   constructor(
@@ -26,7 +27,8 @@ export class ConnexionValideComponent implements OnInit {
     this.mdpCtrl = this.fb.control('', Validators.required);
 
     this.validationForm = this.fb.group({
-      password: this.mdpCtrl
+      password: this.mdpCtrl,
+      sauvegarder: this.saveCtrl
     });
   }
 
@@ -42,6 +44,14 @@ export class ConnexionValideComponent implements OnInit {
       //Est ce le bon mot de passe
       if(this.connexionService.validationMDP(this.storageService.readSession('Prof'),
                                           this.validationForm.value.password)){
+        if(this.validationForm.value.sauvegarder){
+          this.storageService.saveLocal('ProfValide', this.storageService.readSession('Prof'));
+          this.storageService.removeSession('Prof');
+        }
+        else{
+          this.storageService.saveSession('ProfValide', this.storageService.readSession('Prof'));
+          this.storageService.removeSession('Prof');
+        }
         this.router.navigate(['profhome']);
       } else {
         this.storageService.clear();
