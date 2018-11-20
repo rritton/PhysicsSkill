@@ -1,1 +1,5 @@
-<p>Conecte ?</p>
+<div class="container text-right" *ngIf="connecte">
+Bonjour {{prof.prenom}} {{prof.nom}}
+<button class="btn btn-primary" (click)="deconnexion()">Exit</button>
+<br/>
+</div>
