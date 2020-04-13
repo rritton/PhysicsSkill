@@ -1,7 +1,7 @@
 import { Joueur } from "./joueur";
 import { Lvl, lvl1 } from "./lvl";
 import { Evaluation } from "./evaluation";
-import { CompetanceEleve } from "./competance";
+import { CompetanceEleve, sappropier, analyser, realiser, valider, communiquer, connaitre, charisme } from "./competance";
 import { Groupe, classes501 } from "./classe";
 
 export class Eleve extends Joueur{
@@ -21,6 +21,6 @@ export const eleve1: Eleve =
         xp: 0,
         lvl: lvl1,
         evaluationsListe: [],
-        competancesListe: [],
+        competancesListe: [sappropier, analyser, realiser, valider, communiquer, connaitre, charisme],
         classe: classes501
     };

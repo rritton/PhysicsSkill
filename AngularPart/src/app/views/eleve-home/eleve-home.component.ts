@@ -22,8 +22,8 @@ export class EleveHomeComponent implements OnInit {
 
   ngOnInit() {
     //Il y a un élève enregistré dans le localSotarge
-    if(this.storageService.readLocal('Eleve') != undefined){
-      this.eleveConnecte = this.storageService.readLocal('Eleve');
+    if(this.storageService.readSession('Eleve') != undefined){
+      this.eleveConnecte = this.storageService.readSession('Eleve');
     } 
     //Il n'y a personne
     else{
