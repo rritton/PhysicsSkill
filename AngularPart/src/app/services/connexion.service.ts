@@ -12,11 +12,12 @@ export class ConnexionService {
     for(let i in joueurs){
       if(joueurs[i].nom == joueur.nom && joueurs[i].prenom == joueur.prenom){
         console.log('Nous vous avons trouvé : '+joueurs[i].role);
-        return joueurs[i];
+        joueur = joueurs[i];
+        return joueur;
       }
     }
     console.log('Nous ne vous avons pas trouvé');
-    return null;
+    return joueur;
   }
 
   //Fonction de validation du mot de passe. A compléter réellement quand l'API sera en place

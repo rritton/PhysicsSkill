@@ -1,4 +1,11 @@
+//ANgular import
 import { Component, OnInit } from '@angular/core';
+
+//Service import
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+
+//Model import
+import { Eleve } from 'src/app/model/eleve';
 
 @Component({
   selector: 'app-eleve-home',
@@ -7,9 +14,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EleveHomeComponent implements OnInit {
 
-  constructor() { }
+  public eleveConnecte: Eleve
+
+  constructor(
+    private storageService: LocalStorageService
+  ) { }
 
   ngOnInit() {
+    //Il y a un élève enregistré dans le localSotarge
+    if(this.storageService.readLocal('Eleve') != undefined){
+      this.eleveConnecte = this.storageService.readLocal('Eleve');
+    } 
+    //Il n'y a personne
+    else{
+      console.log("Raté")
+    }
   }
 
 }

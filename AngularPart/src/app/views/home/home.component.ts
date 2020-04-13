@@ -54,12 +54,14 @@ export class HomeComponent implements OnInit {
     if(this.connexionForm.value.nom.trim() == '') {
       champsRemplis = false;
       this.messageNom = 'Veuillez renseigner votre nom.'
-    }
+    } 
+    else this.messageNom = ''
     //Vérification du champ "Prénom"
     if(this.connexionForm.value.prenom.trim() == '') {
       champsRemplis = false;
       this.messagePrenom = 'Veuillez renseigner votre prénom.'
-    }
+    } 
+    else this.messagePrenom = ''
     //OUI ?
     if(champsRemplis){
       const joueurForm = {
@@ -70,17 +72,19 @@ export class HomeComponent implements OnInit {
       };
 
       let joueurTest = this.connexionService.connexion(joueurForm);
-      if(joueurTest instanceof Eleve || joueurTest.role == 'Eleve'){
+      if(joueurTest.role == 'Eleve'){
+        let joueurObtenu = joueurTest as Eleve;
+        this.storageService.saveSession('Eleve', joueurObtenu);
         this.router.navigate(['elevehome']);
       }
-      else if(joueurTest instanceof Prof || joueurTest.role == 'Prof'){
+      else if(joueurTest.role == 'Prof'){
         let joueurObtenu = joueurTest as Prof;
         joueurObtenu.motDePasse = '';
         this.storageService.saveSession('Prof', joueurObtenu);
         this.router.navigate(['mdp']);
       }
       else {
-        this.messageSubmit = 'Ensemble Nom et Prénom inconnu.'
+        this.messageSubmit = 'Ensemble Nom et Prénom inconnu.';
       }
     }
   }
