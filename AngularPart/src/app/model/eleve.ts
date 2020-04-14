@@ -18,7 +18,7 @@ export const eleve1: Eleve =
         nom: 'Dufour',
         prenom: 'Amélie',
         role: 'Eleve',
-        xp: 0,
+        xp: 47,
         lvl: lvl1,
         evaluationsListe: [],
         competancesListe: [sappropier, analyser, realiser, valider, communiquer, connaitre, charisme],

@@ -1,5 +1,6 @@
 //ANgular import
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 //Service import
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -17,7 +18,8 @@ export class EleveHomeComponent implements OnInit {
   public eleveConnecte: Eleve
 
   constructor(
-    private storageService: LocalStorageService
+    private storageService: LocalStorageService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -29,6 +31,10 @@ export class EleveHomeComponent implements OnInit {
     else{
       console.log("Raté")
     }
+  }
+
+  onRetour() {
+    this.router.navigate(['']);
   }
 
 }
