@@ -1,15 +1,60 @@
 export class Competance{
+    //Attributs
     id: number;
-    nom: String;
+    nom: string;
+    evaluationListe: number[][];
+
+    //Méthodes
+    constructor(nom: string){
+        this.id = 0;
+        this.nom = nom;
+        this.evaluationListe = [];
+    }
+
+    //Ajout d'une évaluation de la compétance
+    adEvaluation(evalRef: number, note: number){
+        let couple = [evalRef,note];
+        this.evaluationListe.push(couple);
+    }
+
+    //Récupération de l'xp total lié à la compétance
+    getXP(){
+        let xp: number;
+        xp = 0;
+        for (let evaluation of this.evaluationListe) {
+            if(evaluation[1]>=0) {
+                xp += evaluation[1];
+            }
+        }
+        return xp;
+    }
+
+    //récupération du nombre de fois où la compétance a été évaluée
+    getPoid(){
+        let nb: number;
+        nb = 0;
+        for (let evaluation of this.evaluationListe) {
+            if(evaluation[1]>=0) { //Les valeurs négatives servent pour les fois où elle aurait dû mais elle n'a pas été évaluée
+                nb ++;
+            }
+        }
+        return nb;
+    }
+
+    //Calcul de la moyenne
+    getMoyenne(){
+        return this.getXP()/this.getPoid();
+    }
 }
 
+/*
 export class CompetanceEleve extends Competance{
     valeurList: Array<CompetanceValeur>;
 }
-
+*/
 
 export enum CompetanceValeur{
-    NonEvalue = -1,
+    NonEvalue = -2,
     Abs = -1,
     A = 6,
     B = 3,
@@ -17,6 +62,7 @@ export enum CompetanceValeur{
     D = 0
 }
 
+/*
 export const sappropier: CompetanceEleve = 
     {
         id: 1,
@@ -65,3 +111,5 @@ export const charisme: CompetanceEleve =
         nom: 'Charisme',
         valeurList: [CompetanceValeur.C, CompetanceValeur.A]
     };
+
+*/
