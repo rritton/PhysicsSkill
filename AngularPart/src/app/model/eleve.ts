@@ -5,11 +5,20 @@ import { CompetanceEleve, sappropier, analyser, realiser, valider, communiquer, 
 import { Groupe, classes501 } from "./classe";
 
 export class Eleve extends Joueur{
+    //Attributs suplémentaires
+    classe: Groupe;
+    competancesListe: Array<CompetanceEleve>;
     xp: number;
     lvl: Lvl;
     evaluationsListe: Array<Evaluation>;
-    competancesListe: Array<CompetanceEleve>;
-    classe: Groupe;
+
+    //Méthodes
+    constructor(nom: string, prenom: string, classe: Groupe){
+        super(nom, prenom, 'Eleve');
+        this.classe = classe;
+        //this.competancesListe = classe.
+        this.xp = 0;
+    }
 }
 
 export const eleve1: Eleve = 

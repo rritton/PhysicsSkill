@@ -2,10 +2,20 @@ import { Joueur } from "./joueur";
 import { Groupe } from "./classe";
 
 export class Prof extends Joueur{
-    motDePasse: String;
+    //Attributs suplémentaires
+    motDePasse: string;
     groupes: Array<Groupe>;
+
+    //Méthodes
+    constructor(nom: string, prenom: string, motDePasse: string){
+        super(nom, prenom, 'Prof');
+        this.motDePasse = motDePasse;
+        this.groupes = [];
+    }
 }
 
+
+// Simulation
 export const prof1: Prof = 
     {
         id: 1,
