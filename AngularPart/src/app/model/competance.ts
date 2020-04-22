@@ -12,9 +12,8 @@ export class Competance{
     }
 
     //Ajout d'une évaluation de la compétance
-    adEvaluation(evalRef: number, note: number){
-        let couple = [evalRef,note];
-        this.evaluationListe.push(couple);
+    adEvaluation(idEvaluation: number, note: number){
+        this.evaluationListe.push([idEvaluation,note]);
     }
 
     //Récupération de l'xp total lié à la compétance
@@ -47,11 +46,6 @@ export class Competance{
     }
 }
 
-/*
-export class CompetanceEleve extends Competance{
-    valeurList: Array<CompetanceValeur>;
-}
-*/
 
 export enum CompetanceValeur{
     NonEvalue = -2,
@@ -62,54 +56,52 @@ export enum CompetanceValeur{
     D = 0
 }
 
-/*
-export const sappropier: CompetanceEleve = 
+
+export const sappropier: Competance = 
     {
         id: 1,
         nom: 'S\'appropier',
-        valeurList: [CompetanceValeur.A, CompetanceValeur.B]
+        evaluationListe: [[1, 6], [2,6]]
     };
 
-export const analyser: CompetanceEleve = 
+export const analyser: Competance = 
     {
         id: 2,
         nom: 'Analyser',
-        valeurList: [CompetanceValeur.A, CompetanceValeur.A]
+        evaluationListe: [[2, 6], [2,3]]
     };
 
-export const realiser: CompetanceEleve = 
+export const realiser: Competance = 
     {
         id: 3,
         nom: 'Réaliser',
-        valeurList: [CompetanceValeur.B, CompetanceValeur.B]
+        evaluationListe: [[4, -1], [2,-2]]
     };
 
-export const valider: CompetanceEleve = 
+export const valider: Competance = 
     {
         id: 4,
         nom: 'Valider',
-        valeurList: [CompetanceValeur.C, CompetanceValeur.B]
+        evaluationListe: [[1, 6], [2,6]]
     };
 
-export const communiquer: CompetanceEleve = 
+export const communiquer: Competance = 
     {
         id: 5,
         nom: 'Communiquer',
-        valeurList: [CompetanceValeur.A, CompetanceValeur.C]
+        evaluationListe: [[4, -1], [2,1]]
     };
 
-export const connaitre: CompetanceEleve = 
+export const connaitre: Competance = 
     {
         id: 6,
         nom: 'Connaître',
-        valeurList: [CompetanceValeur.C, CompetanceValeur.C]
+        evaluationListe: [[1, 3], [2,3]]
     };
 
-export const charisme: CompetanceEleve = 
+export const charisme: Competance = 
     {
         id: 7,
         nom: 'Charisme',
-        valeurList: [CompetanceValeur.C, CompetanceValeur.A]
+        evaluationListe: [[1, 6], [2,6]]
     };
-
-*/
