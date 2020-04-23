@@ -18,21 +18,6 @@ export class Groupe{
         this.eleveListe = eleveListe;
         this.evaluationListe = [];
     }
-
-    //Ajout d'un lvl
-    ajoutLvl(lvl: Lvl){
-        this.lvlListe.push(lvl);
-    }
-
-    //Ajout d'un élève
-    ajoutEleve(eleve: Eleve){
-        this.eleveListe.push(eleve);
-    }
-
-    //Ajout d'une évaluation
-    ajoutEval(evaluation: Evaluation){
-        this.evaluationListe.push(evaluation);
-    }
 }
 
 export const classes501: Groupe = 

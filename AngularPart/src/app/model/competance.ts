@@ -10,40 +10,6 @@ export class Competance{
         this.nom = nom;
         this.evaluationListe = [];
     }
-
-    //Ajout d'une évaluation de la compétance
-    adEvaluation(idEvaluation: number, note: number){
-        this.evaluationListe.push([idEvaluation,note]);
-    }
-
-    //Récupération de l'xp total lié à la compétance
-    getXP(){
-        let xp: number;
-        xp = 0;
-        for (let evaluation of this.evaluationListe) {
-            if(evaluation[1]>=0) {
-                xp += evaluation[1];
-            }
-        }
-        return xp;
-    }
-
-    //récupération du nombre de fois où la compétance a été évaluée
-    getPoid(){
-        let nb: number;
-        nb = 0;
-        for (let evaluation of this.evaluationListe) {
-            if(evaluation[1]>=0) { //Les valeurs négatives servent pour les fois où elle aurait dû mais elle n'a pas été évaluée
-                nb ++;
-            }
-        }
-        return nb;
-    }
-
-    //Calcul de la moyenne
-    getMoyenne(){
-        return this.getXP()/this.getPoid();
-    }
 }
 
 

@@ -24,32 +24,6 @@ export class Eleve extends Joueur{
         this.competanceListe.push(new Competance("charisme"));
     }
 
-    //Récupération de l'xp total lié aux compétances
-    getXP(){
-        let xp: number;
-        xp = 0;
-        for (let competance of this.competanceListe){
-            xp += competance.getXP();
-        }
-        return xp
-    }
-
-    //Récupération du lvl
-    getLvl(){
-        let xp = this.getXP();
-        let lvlEleve: Lvl;
-        for(let lvl of this.classe.lvlListe){
-            if(lvl.xpMin <= xp && lvl.xpMax > xp){
-                lvlEleve = lvl;
-            }
-        }
-        return lvlEleve;
-    }
-
-    //Récupération de la moyenne
-    getNote(){
-        return 10;
-    }
 }
 
 export const eleve1: Eleve = 
