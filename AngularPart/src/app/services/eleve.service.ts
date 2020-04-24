@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Eleve } from '../model/eleve';
 import { Lvl } from '../model/lvl';
 import { CompetanceService } from './competance.service';
+import { Groupe } from '../model/classe';
 
 @Injectable({
   providedIn: 'root'
@@ -26,10 +27,10 @@ export class EleveService {
   }
 
   //Récupération du lvl
-  getLvl(eleve: Eleve){
+  getLvl(eleve: Eleve, classe: Groupe){
       let xp = this.getXP(eleve);
       let lvlEleve: Lvl;
-      for(let lvl of eleve.classe.lvlListe){
+      for(let lvl of classe.lvlListe){
           if(lvl.xpMin <= xp && lvl.xpMax > xp){
               lvlEleve = lvl;
           }

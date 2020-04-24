@@ -1,18 +1,57 @@
 <div class="container">
-  <form (ngSubmit)="saveClasse()" [formGroup]="saveClasseForm">
-    <div >
+  <form (ngSubmit)="saveClasse()" [formGroup]="classeCreateForm">
+    <div class="form-group">
       <label for="nom">Nom de la classe :</label>
       <input class="form-control col-8" type="text" name="nom" id="nom" formControlName="nom" required placeholder="501">
       <span class="erreur-message col-4">{{messageNom}}</span>
     </div>
-    <div>
-      <label for="prenom">Prénom :</label>
-      <input class="form-control col-8" type="text" name="prenom" id="prenom" formControlName="prenom" required placeholder="Arya">
-      <span class="erreur-message col-4">{{messagePrenom}}</span>
+    
+    <div formArrayName="lvlListe">
+      <p>Les lvl de la classes</p>
+      <div class="form-group" *ngFor="let lvlContorl of getLvl().controls; let i = index">
+        
+        <div class="form-group" >
+          <label for="nom">Nom du lvl :</label>
+          <input class="form-control col-8" type="text" name="nom" id="nom" formControlName="nom" required placeholder="Sid">
+          <span class="erreur-message col-4">{{messageNom}}</span>
+        </div>
+        <div class="form-group" hidden>
+          <label for="numero">Numéro du lvl :</label>
+          <input class="form-control col-8" numeric type="text" name="numero" id="numero" formControlName="numero" required value=i>
+          <span class="erreur-message col-4">{{messageNumero}}</span>
+        </div>
+        <div class="form-group" hidden>
+          <label for="xpMin">XP de début du lvl :</label>
+          <input class="form-control col-8" numeric type="text" name="xpMin" id="xpMin" formControlName="xpMin" required value=0>
+          <span class="erreur-message col-4">{{messageXPMin}}</span>
+        </div>
+        <div class="form-group">
+          <label for="xpMax">XP de fin du lvl :</label>
+          <input class="form-control col-8" numeric type="text" name="xpMax" id="xpMax" formControlName="xpMax" required>
+          <span class="erreur-message col-4">{{messageXPMax}}</span>
+        </div>
+        <div class="form-group">
+          <label for="image">Image du lvl :</label><br>
+          <input type="file" name="image" id="image" formControlName="image" required>
+          <span class="erreur-message col-4">{{messageImage}}</span>
+        </div>
+
+      </div>
+      <button type="button" class="btn btn-success" (click)="ajoutLvl()">Ajouter un lvl</button>
     </div>
-    <br/>
+    <br>
+    
+    <div formArrayName="eleveListe">
+      <p>Les élèves de la classes</p>
+      <div class="form-group" *ngFor="let eleveContorl of getEleve().controls; let i = index">
+        <p>formulaire des élèves</p>
+      </div>
+      <button type="button" class="btn btn-success" (click)="ajoutEleve()">Ajouter un élève</button>
+    </div>
+    <br>
+
     <div>
-      <button class="btn btn-primary" type="submit">Connexion</button> 
+      <button class="btn btn-primary" type="submit" [disabled]="classeCreateForm.invalid">Sauvegarder</button> 
       <span class="erreur-message">{{messageSubmit}}</span>
     </div>
   </form>
