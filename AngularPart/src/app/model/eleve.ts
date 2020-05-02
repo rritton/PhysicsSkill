@@ -11,6 +11,7 @@ export class Eleve extends Joueur{
     constructor(nom: string, prenom: string){
         super(nom, prenom, 'Eleve');
         this.evaluationsListe = [];
+        this.competanceListe = [];
         this.competanceListe.push(new Competance("s'appropier"));
         this.competanceListe.push(new Competance("analyser"));
         this.competanceListe.push(new Competance("réaliser"));

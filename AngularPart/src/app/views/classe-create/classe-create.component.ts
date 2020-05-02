@@ -68,6 +68,7 @@ export class ClasseCreateComponent implements OnInit {
 
   //Méthodes du submit pour la création de la classe
   saveClasse(){
+    console.log("Bienvenue dans saveClasse");
     const formValue = this.classeCreateForm.value;
 
 
@@ -98,5 +99,6 @@ export class ClasseCreateComponent implements OnInit {
 
     //Création de la classe
     const newClasse = new Groupe(formValue["nom"], lvlListeForm, eleveListeForm);
+    console.log("au revoir");
   }
 }
